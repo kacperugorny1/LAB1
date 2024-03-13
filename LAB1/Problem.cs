@@ -26,7 +26,7 @@ namespace LAB1
         {
             List<Item> backpack = new List<Item>();
             items.Sort((x, y) => { 
-                float res = ((float)x.Value / (float)x.Weight - (float)y.Value / (float)y.Weight) < 0 ? 1 : -1;
+                float res = ((float)x.Value / (float)x.Weight - (float)y.Value / (float)y.Weight);
                 if (res < 0) return 1;
                 if (res > 0) return -1;
                 return 0;
@@ -40,6 +40,13 @@ namespace LAB1
                 }
             });
             return new Result(backpack);
+        }
+        public override string ToString()
+        {
+            string str = "Index:\tValue:\tWeight:\n";
+            for (int i = 0; i < n; i++)
+                str += $"{i}\t{items[i].Value}\t{items[i].Weight}\n";
+            return str;
         }
 
 
