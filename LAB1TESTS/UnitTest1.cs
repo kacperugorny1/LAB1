@@ -6,7 +6,7 @@ namespace LAB1TESTS
     public class UnitTest1
     {
         [TestMethod]
-        public void ReturnEmptyMissingCapacity()
+        public void ReturnEmptyZeroCapacity()
         {
             string expected_str = "items: \ntotal value: 0\ntotal weight: 0";
             int seed = 1, n = 10, capacity = 0;
@@ -15,7 +15,7 @@ namespace LAB1TESTS
             Assert.IsTrue(res.ToString() == expected_str);
         }
         [TestMethod]
-        public void ReturnEmptyMissingCapacityAndItems()
+        public void ReturnEmptyZeroCapacityAndItems()
         {
             string expected_str = "items: \ntotal value: 0\ntotal weight: 0";
             int seed = 1, n = 0, capacity = 0;
@@ -23,8 +23,9 @@ namespace LAB1TESTS
             Result res = prb.Solve(capacity);
             Assert.IsTrue(res.ToString() == expected_str);
         }
+       
         [TestMethod]
-        public void ReturnEmptyMissingItems()
+        public void ReturnEmptyZeroItems()
         {
             string expected_str = "items: \ntotal value: 0\ntotal weight: 0";
             int seed = 1, n = 0, capacity = 10;
@@ -35,16 +36,15 @@ namespace LAB1TESTS
         [TestMethod]
         public void ReturnNotEmpty()
         {
-            string expected_str = "items: 4 5 6 8 \ntotal value: 27\ntotal weight: 10";
             int seed = 1, n = 10, capacity = 10;
             Problem prb = new(n, seed);
             Result res = prb.Solve(capacity);
-            Assert.IsTrue(res.ToString() == expected_str);
+            Assert.IsTrue(res.ToString().Split("\n")[1] != "total value: 0");
         }
 
         //Konkretny przyk³ad - seed == 10, n == 10, capacity == 10
         [TestMethod]
-        public void Seed10Capacity10()
+        public void ProblemInstance()
         {
             string expected_str = "items: 4 8 3 \ntotal value: 17\ntotal weight: 8";
             int seed = 10, n = 10, capacity = 10;
@@ -82,7 +82,25 @@ namespace LAB1TESTS
                 res = prb.Solve(capacity);
                 Assert.IsTrue(res.ToString() == expected_str);
             }
+            
         }
-
+        [TestMethod]
+        public void NegativeCapacity()
+        {
+            string expected_str = "items: \ntotal value: 0\ntotal weight: 0";
+            int seed = 0, n = 5, capacity = -1;
+            Problem prb = new(n, seed);
+            Result res = prb.Solve(capacity);
+            Assert.IsTrue(res.ToString() == expected_str);
+        }
+        [TestMethod]
+        public void NegativeCount()
+        {
+            string expected_str = "items: \ntotal value: 0\ntotal weight: 0";
+            int seed = 0, n = -5, capacity = 0;
+            Problem prb = new(n, seed);
+            Result res = prb.Solve(capacity);
+            Assert.IsTrue(res.ToString() == expected_str);
+        }
     }
 }

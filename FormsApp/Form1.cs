@@ -33,8 +33,11 @@ namespace FormsApp
                 textBox5.Text += "Seed jest b³êdny\r\n";
                 dont_count = true;
             }
-            if (dont_count) return;
-
+            if (dont_count)
+            {
+                
+                return;
+            }
             Problem prb = new(count, seed);
             textBox4.Text = prb.ToString().Replace("\n", Environment.NewLine);
             Result res = prb.Solve(capacity);
